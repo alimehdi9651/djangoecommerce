@@ -17,9 +17,9 @@ def login_view(request):
         if not password:
             messages.error(request, 'Password is required')
             return redirect('login')
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password) #authenticate return a object if username and password matches from the data base
         if user is None:
-            messages.error(request, 'Invalid credentials')
+            messages.error(request, 'Username or password is incorrect credentials')
             return redirect('login')
         if not user.groups.exists():                    # Check if user has a group
             messages.error(request, '!Contact your administrator')
