@@ -17,9 +17,9 @@ def login_view(request):
         if not password:
             messages.error(request, 'Password is required')
             return redirect('login')
-        user = authenticate(request, username=username, password=password) #authenticate return a object if username and password matches from the data base
+        user = authenticate(request, username=username, password=password)
         if user is None:
-            messages.error(request, 'Username or password is incorrect credentials')
+            messages.error(request, 'Invalid credentials')
             return redirect('login')
         if not user.groups.exists():                    # Check if user has a group
             messages.error(request, '!Contact your administrator')
@@ -160,4 +160,6 @@ def sdashboard_view(request):
     return render(request, 'accounts/dashboard_s.html')
 
 def logout_view(request):
+    logout(request)
     return redirect('index')
+    
