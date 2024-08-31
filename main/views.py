@@ -36,7 +36,7 @@ def register_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        cpassword = request.POST.get('cpassword')
+        confirm_password = request.POST.get('confirm_password')
         email = request.POST.get('email')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -46,7 +46,7 @@ def register_view(request):
         if not password:
             messages.error(request, 'Password is required')
             return redirect('register')
-        if not cpassword:
+        if not confirm_password:
             messages.error(request, 'Confirm Password is required')
             return redirect('register')
         if not email:
@@ -58,7 +58,7 @@ def register_view(request):
         if not last_name:
             messages.error(request, 'Last Name is required')
             return redirect('register')
-        if password != cpassword:
+        if password != confirm_password:
             messages.error(request, 'Passwords do not match')
             return redirect('register')
         if User.objects.filter(username=username).exists():
@@ -110,7 +110,7 @@ def sregister_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        cpassword = request.POST.get('cpassword')
+        confirm_password = request.POST.get('confirm_password')
         email = request.POST.get('email')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -120,7 +120,7 @@ def sregister_view(request):
         if not password:
             messages.error(request, 'Password is required')
             return redirect('seller_register')
-        if not cpassword:
+        if not confirm_password:
             messages.error(request, 'Confirm Password is required')
             return redirect('seller_register')
         if not email:
@@ -132,7 +132,7 @@ def sregister_view(request):
         if not last_name:
             messages.error(request, 'Last Name is required')
             return redirect('seller_register')
-        if password != cpassword:
+        if password != confirm_password:
             messages.error(request, 'Passwords do not match')
             return redirect('seller_register')
         if User.objects.filter(username=username).exists():
