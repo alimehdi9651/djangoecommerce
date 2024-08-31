@@ -36,7 +36,7 @@ def register_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        confirmpassword = request.POST.get('confirm_password')
+        cpassword = request.POST.get('cpassword')
         email = request.POST.get('email')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -46,7 +46,7 @@ def register_view(request):
         if not password:
             messages.error(request, 'Password is required')
             return redirect('register')
-        if not confirmpassword:
+        if not cpassword:
             messages.error(request, 'Confirm Password is required')
             return redirect('register')
         if not email:
@@ -58,7 +58,7 @@ def register_view(request):
         if not last_name:
             messages.error(request, 'Last Name is required')
             return redirect('register')
-        if password != confirmpassword:
+        if password != cpassword:
             messages.error(request, 'Passwords do not match')
             return redirect('register')
         if User.objects.filter(username=username).exists():
@@ -99,20 +99,18 @@ def slogin_view(request):
             messages.error(request, '!Contact your administrator')
             return redirect('seller_login')
         groups = user.groups.all()       # Get the first group name
-        if len(groups)==0 and groups[0].name != 'customer':
+        if len(groups)==0 and groups[0].name != 'seller':
             messages.error(request, 'You are not authorized to login!')
             return redirect('seller_login')
         login(request, user)
         return redirect('seller_dashboard')
     return render(request, 'accounts/login_s.html')
 
-   
-
 def sregister_view(request):
-     if request.method == 'POST':
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm_password')
+        cpassword = request.POST.get('cpassword')
         email = request.POST.get('email')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -122,7 +120,7 @@ def sregister_view(request):
         if not password:
             messages.error(request, 'Password is required')
             return redirect('seller_register')
-        if not confirm_password:
+        if not cpassword:
             messages.error(request, 'Confirm Password is required')
             return redirect('seller_register')
         if not email:
@@ -134,7 +132,7 @@ def sregister_view(request):
         if not last_name:
             messages.error(request, 'Last Name is required')
             return redirect('seller_register')
-        if password != confirm_password:
+        if password != cpassword:
             messages.error(request, 'Passwords do not match')
             return redirect('seller_register')
         if User.objects.filter(username=username).exists():
@@ -151,10 +149,7 @@ def sregister_view(request):
         group.save()
         messages.success(request, 'Seller account created successfully')
         return redirect('seller_login')
-     
-     return render(request, 'accounts/register_s.html')
-    
-    
+    return render(request, 'accounts/register_s.html')
 
 def sdashboard_view(request):
     return render(request, 'accounts/dashboard_s.html')
@@ -162,4 +157,3 @@ def sdashboard_view(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
-    
