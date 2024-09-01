@@ -79,6 +79,14 @@ def product_detail(request,slug):
         request, 'products/detail.html',
         context={'product': product}
     )
+
+
+def product_wishlist(request):
+    return render(
+        request, 'products/wishlist.html',
+        context={'wishlist': Wishlist.objects.filter(user=request.user)}
+    )
+
 def category_product_list(request,category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     return render(
@@ -88,5 +96,21 @@ def category_product_list(request,category_slug):
             'products' : Product.objects.filter(category=category)
         }
     )
+
+def wishlist_add(request,slug):
+    product = get_object_or_404(Product, slug=slug)
+    Wishlist.objects.create(product=product, user=request.user)
+    messages.success(request, 'Product added to wishlist')
+    # back to same page
+    return redirect(request.META.get('HTTP_REFERER'))
+
+def wishlist_remove(request,slug):
+    product = get_object_or_404(Product, slug=slug)
+    Wishlist.objects.filter(product=product, user=request.user).delete()
+    messages.success(request, 'Product removed from wishlist')
+    # back to same page
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
 def search(request):
     pass
