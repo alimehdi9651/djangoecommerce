@@ -27,6 +27,9 @@ def category_edit(request, slug):
     pass
 def category_delete(request, slug):
     pass
+
+
+
 def product_list(request):
     return render(
         request, 'products/list.html',
@@ -39,8 +42,8 @@ def product_create(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             product = form.save(commit=False)   # save to memory, not in database
-            product.seller = request.user
-            product.slug = slugify(product.title)
+            product.seller = request.user #  assigns the current user (who is creating the product) as the seller of the product.
+            product.slug = slugify(product.title) #  generates a URL-friendly slug from the product title. slugify typically converts spaces and special characters into hyphens and converts the text to lowercase.
             product.save()                      # save to database
             messages.success(request, 'Product created successfully')
             return redirect('product_detail', slug=product.slug)

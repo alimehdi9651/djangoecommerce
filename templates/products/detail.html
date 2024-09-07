@@ -52,6 +52,15 @@
             </a>
             {% else %}
 
+            <div class="d-flex justify-content-start mt-2 gap-2">
+                <a href="{% url 'wishlist_add' product.slug %}" class="btn btn-secondary">
+                    <i class="fas fa-heart"></i> Wishlist
+                </a>
+                <a href="#" class="btn btn-success">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </a>
+            </div>
+
             {% endif %}
         </div>
     </div>
