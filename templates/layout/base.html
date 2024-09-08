@@ -24,6 +24,20 @@
 <body>
     <header>
         {% include 'components/header.html' %}
+
+        
+        {% if messages %}
+        
+        {% for message in messages %}
+        <div class="aleart aleart-{{message.tags}}">
+            <strong>{{message}}</strong>
+        </div>
+            
+        {% endfor %}
+            
+            
+        {% endif %}
+            
     </header>
     <main>
         {% block content %}

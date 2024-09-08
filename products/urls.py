@@ -17,7 +17,7 @@ urlpatterns = [
     path('<slug:category_slug>/products', category_product_list, name='product_list_by_category'),
     path('search/', search, name='search'),
 
-     # wishlist
+    # wishlist
     path('wishlist/', product_wishlist, name='wishlist'),
     path('wishlist/add/<slug:slug>/', wishlist_add, name='wishlist_add'),
     path('wishlist/remove/<slug:slug>/', wishlist_remove, name='wishlist_remove'),

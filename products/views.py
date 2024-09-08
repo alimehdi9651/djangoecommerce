@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.utils.text import slugify
+from django.contrib.auth.decorators import login_required
 
 def category_list(request):
     return render(
