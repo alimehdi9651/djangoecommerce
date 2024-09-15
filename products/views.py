@@ -118,3 +118,8 @@ def wishlist_remove(request,slug):
 
 def search(request):
     pass
+
+def add_image(request,slug):
+    product = get_object_or_404(Product, slug=slug)
+    
+    pass
