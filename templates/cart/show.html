@@ -29,7 +29,7 @@
                                     Delivery Charges based on location
                                 </caption>
                                 <tr>
-                                    <th>#</th>
+                                    <th style="width: 110px;">#</th>
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>Qty</th>
@@ -42,11 +42,11 @@
                                 <tr class="table-primary">
                                     <td scope="row">
                                         <img src="{{item.product.image.url}}" alt="product" class="img-fluid"
-                                            style="height: 100px; object-fit: cover;">
+                                            style="height: 100px ;width: 100px; object-fit: contain;">
                                     </td>
                                     <td>
                                         <h4>{{item.product.title}}</h4>
-                                        <p>{{item.product.description}}</p>
+                                        <p>{{item.product.description|truncatewords:6}}</p>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-between">
@@ -55,7 +55,14 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-between">
+                                            <a class="btn btn-danger" href="{% url 'increase_qty' item.product.slug %}">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </a>
+                                            
                                             {{item.quantity}}
+                                            <a class="btn btn-danger" href="{% url 'decrease_qty' item.product.slug %}">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </a>
                                         </div>
                                     </td>
                                     <td>

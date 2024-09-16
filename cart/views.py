@@ -35,7 +35,8 @@ def add_product(request, product):
     # if cart exists for user, get it, else create it
     cart, _ = Cart.objects.get_or_create(user=request.user)
     # add the product to CartItem
-    cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product) #This checks if a CartItem (which represents an item in the cart) exists for the specific cart and product. If it exists, it's retrieved, and if it doesn't, a new CartItem is created.
+    # The item_created variable is True if the item is newly created and False if it already exists.
     if not item_created:
         cart_item.quantity += 1
         cart_item.save()
