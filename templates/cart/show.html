@@ -55,12 +55,12 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-between">
-                                            <a class="btn btn-danger" href="{% url 'increase_qty' item.product.slug %}">
+                                            <a class="btn" href="{% url 'increase_qty' item.product.slug %}">
                                                 <i class="fa-solid fa-plus"></i>
                                             </a>
-                                            
+
                                             {{item.quantity}}
-                                            <a class="btn btn-danger" href="{% url 'decrease_qty' item.product.slug %}">
+                                            <a class="btn" href="{% url 'decrease_qty' item.product.slug %}">
                                                 <i class="fa-solid fa-minus"></i>
                                             </a>
                                         </div>
@@ -87,7 +87,7 @@
                             <tfoot>
                                 <tr class="table-light fw-bolder">
                                     <td colspan="5">Total</td>
-                                    <td >{{total_price}}</td>
+                                    <td>{{total_price}}</td>
                                 </tr>
                             </tfoot>
                         </table>
