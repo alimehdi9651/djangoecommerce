@@ -8,8 +8,7 @@ from django.contrib import messages
 from django.conf import settings
 import razorpay
 
-razorpay_client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, 
-                                        settings.RAZOR_KEY_SECRET))
+
 
 @login_required
 def show_cart(request):
@@ -90,6 +89,9 @@ def decrease_qty(request, product):
     cart_item.quantity -= 1
     cart_item.save()
     return redirect(referrer)
+
+razorpay_client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+
 
 @login_required
 def checkout(request):
