@@ -100,6 +100,8 @@ def checkout(request):
     total = 0
     for item in cart_items:
         total += item.product.price * item.quantity
+
+    
     razorpay_order = razorpay_client.order.create({
         'amount' : int(total * 100),
         'currency': 'INR',
